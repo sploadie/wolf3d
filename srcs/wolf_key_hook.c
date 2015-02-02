@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 16:21:09 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/02/02 13:32:05 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 17:23:43 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int		wolf_key_hook(int keycode, void *env_ptr)
 	else if (keycode == 119)
 	{
 		ft_putendl("Key W");
-		env->camera->point->x += (int)floor(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
-		env->camera->point->z += (int)floor(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->x += (int)round(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->z += (int)round(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
 	}
 	else if (keycode == 101)
 	{
@@ -72,20 +72,20 @@ int		wolf_key_hook(int keycode, void *env_ptr)
 	else if (keycode == 97)
 	{
 		ft_putendl("Key A");
-		env->camera->point->x -= (int)floor(VELOCITY * cos((env->camera->y_ang) * DEGREE));
-		env->camera->point->z -= (int)floor(VELOCITY * sin((env->camera->y_ang) * DEGREE));
+		env->camera->point->x -= (int)round(VELOCITY * cos((env->camera->y_ang) * DEGREE));
+		env->camera->point->z -= (int)round(VELOCITY * sin((env->camera->y_ang) * DEGREE));
 	}
 	else if (keycode == 115)
 	{
 		ft_putendl("Key S");
-		env->camera->point->x -= (int)floor(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
-		env->camera->point->z -= (int)floor(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->x -= (int)round(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->z -= (int)round(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
 	}
 	else if (keycode == 100)
 	{
 		ft_putendl("Key D");
-		env->camera->point->x += (int)floor(VELOCITY * cos((env->camera->y_ang) * DEGREE));
-		env->camera->point->z += (int)floor(VELOCITY * sin((env->camera->y_ang) * DEGREE));
+		env->camera->point->x += (int)round(VELOCITY * cos((env->camera->y_ang) * DEGREE));
+		env->camera->point->z += (int)round(VELOCITY * sin((env->camera->y_ang) * DEGREE));
 	}
 	// else if (keycode == 45)
 	// {

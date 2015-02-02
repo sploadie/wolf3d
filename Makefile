@@ -6,7 +6,7 @@
 #    By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/20 16:35:37 by tgauvrit          #+#    #+#              #
-#    Updated: 2015/01/27 16:34:49 by tgauvrit         ###   ########.fr        #
+#    Updated: 2015/02/02 17:30:23 by tgauvrit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,21 +33,21 @@ FT_LIB_DIR =	./libft/
 SRC_DIR =		./srcs/
 
 SRC_COMPILED =	main.o \
-				wolf3d_error.o \
-				get_next_line.o \
+				check_malloc.o \
+				gen_cam_picture.o \
+				gen_cam_points.o \
 				get_file_height.o \
 				get_file_width.o \
-				check_malloc.o \
-				gen_mlx_window.o \
+				get_next_line.o \
+				new_wolf_cam.o \
+				new_wolf_img.o \
+				new_wolf_map.o \
 				new_wolf_point.o \
 				new_wolf_wall.o \
-				new_wolf_cam.o \
-				new_wolf_map.o \
-				new_wolf_img.o \
 				parse_wolf_map.o \
-				gen_cam_points.o \
-				gen_cam_picture.o \
+				wolf3d_error.o \
 				wolf_clear_img.o \
+				gen_mlx_window.o \
 				wolf_key_hook.o
 
 COMPILED =		$(SRC_COMPILED)

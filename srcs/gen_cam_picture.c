@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 13:49:00 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/02/02 13:24:52 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 17:21:59 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,14 @@ static t_wolf_ray	*cast_ray(double angle, t_wolf_wall *wall, t_wolf_ray *ray)
 	// 	return (cast_ray(angle, wall->next, ray));
 	// if (abs(angle) > 1 && cross_z > 0)
 	// 	return (cast_ray(angle, wall->next, ray));
-	// distance = cross_z;
-	distance = sqrt((cross_x * cross_x) + (cross_z * cross_z));
+	//DISTANCE T1
+	// distance = sqrt((cross_x * cross_x) + (cross_z * cross_z));
+	//DISTANCE T2
+	distance = cross_z;
+	//DISTANCE T3
+	// distance = abs(sqrt((cross_x * cross_x) + (cross_z * cross_z)) * sin(angle * DEGREE));
+	//DISTANCE T4
+	// distance = (((p2->cam_z - p1->cam_z) / (p2->cam_x - p1->cam_x)) * (cross_x - p1->cam_x)) + p1->cam_z;
 	if (!ray)
 	{
 		// ft_putstr("\nRay generated.");//FIXME
@@ -109,14 +115,18 @@ static t_wolf_ray	*cast_ray(double angle, t_wolf_wall *wall, t_wolf_ray *ray)
 static void	draw_column(t_wolf_win *win, int x, double distance, int color)
 {
 	int			i;
-	double		height_percent;
+	// double		height_percent;
 	double		wall_height;
 	int			max;
 
-	height_percent = 100.0 - (distance / 10.0);
-	if (height_percent < 0)
-		height_percent = 0;
-	wall_height = (win->height * height_percent) / 100;
+	// height_percent = 100.0 - (distance / 10.0);
+	// if (height_percent < 0)
+	// 	height_percent = 0;
+	// wall_height = (win->height * height_percent) / 100;
+	// // wall_height = (win->height + 50) - distance;
+	wall_height = (atan(((double)SCOPE / 2) / distance) / DEGREE) / ((double)VIEW_WIDTH / (double)win->width) * 2;
+	if (wall_height > win->height)
+		wall_height = win->height;
 	max = (int)floor((win->height / 2) + (wall_height / 2));
 	i  = (int)floor((win->height / 2) - (wall_height / 2));
 	while (i < max)
