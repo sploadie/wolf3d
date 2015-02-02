@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 16:21:09 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 19:17:31 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 13:32:05 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int		wolf_key_hook(int keycode, void *env_ptr)
 	else if (keycode == 119)
 	{
 		ft_putendl("Key W");
-		env->camera->point->z += VELOCITY;
+		env->camera->point->x += (int)floor(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->z += (int)floor(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
 	}
 	else if (keycode == 101)
 	{
@@ -71,17 +72,20 @@ int		wolf_key_hook(int keycode, void *env_ptr)
 	else if (keycode == 97)
 	{
 		ft_putendl("Key A");
-		env->camera->point->x -= VELOCITY;
+		env->camera->point->x -= (int)floor(VELOCITY * cos((env->camera->y_ang) * DEGREE));
+		env->camera->point->z -= (int)floor(VELOCITY * sin((env->camera->y_ang) * DEGREE));
 	}
 	else if (keycode == 115)
 	{
 		ft_putendl("Key S");
-		env->camera->point->z -= VELOCITY;
+		env->camera->point->x -= (int)floor(VELOCITY * cos((env->camera->y_ang + 90) * DEGREE));
+		env->camera->point->z -= (int)floor(VELOCITY * sin((env->camera->y_ang + 90) * DEGREE));
 	}
 	else if (keycode == 100)
 	{
 		ft_putendl("Key D");
-		env->camera->point->x += VELOCITY;
+		env->camera->point->x += (int)floor(VELOCITY * cos((env->camera->y_ang) * DEGREE));
+		env->camera->point->z += (int)floor(VELOCITY * sin((env->camera->y_ang) * DEGREE));
 	}
 	// else if (keycode == 45)
 	// {
@@ -120,6 +124,7 @@ int		wolf_key_hook(int keycode, void *env_ptr)
 		write(1, "\n", 1);
 		return(0);
 	}
+	printf("Camera: (%i, %i) angle: %f\n", env->camera->point->x, env->camera->point->z, env->camera->y_ang);//FIXME
 	ft_putstr("Clear Image... ");
 	wolf_clear_img(env->win);
 	ft_putstr("Regen Camera Map... ");

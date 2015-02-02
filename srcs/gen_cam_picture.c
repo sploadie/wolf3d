@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 13:49:00 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 19:24:55 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 13:24:52 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,11 @@ void	gen_cam_picture(t_env *env)
 		if (ray)
 		{
 			draw_column(env->win, i, ray->distance, ray->wall->color);
-			printf("Angle: %f, %f i: %i, Distance: %f\n", angle, tan(angle * DEGREE), i, ray->distance);//FIXME
-			printf("Wall: %#x, left: (%4f, %4f), right: (%4f, %4f)\n", ray->wall->color, ray->wall->left->cam_x, ray->wall->left->cam_z, ray->wall->right->cam_x, ray->wall->right->cam_z);//FIXME
+			// printf("Angle: %f, %f i: %i, Distance: %f\n", angle, tan(angle * DEGREE), i, ray->distance);//FIXME
+			// printf("Wall: %#x, left: (%4f, %4f), right: (%4f, %4f)\n", ray->wall->color, ray->wall->left->cam_x, ray->wall->left->cam_z, ray->wall->right->cam_x, ray->wall->right->cam_z);//FIXME
 		}
-		else//FIXME
-			printf("NO WALL: Angle: %f %f\n", angle, tan(angle * DEGREE));//FIXME
+		// else//FIXME
+		// 	printf("NO WALL: Angle: %f %f\n", angle, tan(angle * DEGREE));//FIXME
 		i++;
 	}
 	mlx_put_image_to_window(env->win->mlx, env->win->win, env->win->img, 0, 0);
