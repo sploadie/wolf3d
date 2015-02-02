@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/04 17:09:11 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/27 15:43:54 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 18:30:26 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_wolf_win	*gen_mlx_window(void *mlx, char *title, int x, int y)
 	t_wolf_win	*neowin;
 
 	neowin = check_malloc(malloc(sizeof(t_wolf_win)));
-	neowin->win = mlx_new_window(mlx, x, y, title);
+	neowin->win = mlx_new_window(mlx, x * 2, y, title);
 	if (!neowin->win)
 		wolf3d_error(NULL);
 	neowin->mlx = mlx;

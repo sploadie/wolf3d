@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 13:49:00 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/02/02 17:21:59 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 19:04:15 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static t_wolf_ray	*cast_ray(double angle, t_wolf_wall *wall, t_wolf_ray *ray)
 	// if (abs(angle) > 1 && cross_z > 0)
 	// 	return (cast_ray(angle, wall->next, ray));
 	//DISTANCE T1
-	// distance = sqrt((cross_x * cross_x) + (cross_z * cross_z));
+	distance = sqrt((cross_x * cross_x) + (cross_z * cross_z));
 	//DISTANCE T2
-	distance = cross_z;
+	// distance = cross_z;
 	//DISTANCE T3
 	// distance = abs(sqrt((cross_x * cross_x) + (cross_z * cross_z)) * sin(angle * DEGREE));
 	//DISTANCE T4
@@ -100,6 +100,7 @@ static t_wolf_ray	*cast_ray(double angle, t_wolf_wall *wall, t_wolf_ray *ray)
 		ray = check_malloc(malloc(sizeof(t_wolf_ray)));
 		ray->wall = wall;
 		ray->distance = distance;
+		ray->cross_z = cross_z;
 	}
 	else if (ray->distance > distance)
 	{
@@ -107,6 +108,7 @@ static t_wolf_ray	*cast_ray(double angle, t_wolf_wall *wall, t_wolf_ray *ray)
 		// print_wall(wall);//FIXME
 		ray->wall = wall;
 		ray->distance = distance;
+		ray->cross_z = cross_z;
 	}
 	return (cast_ray(angle, wall->next, ray));
 	// return (ray);
@@ -136,6 +138,30 @@ static void	draw_column(t_wolf_win *win, int x, double distance, int color)
 	}
 }
 
+static void	draw_column2(t_wolf_win *win, int x, double distance, int color)
+{
+	int			i;
+	// double		height_percent;
+	double		wall_height;
+	int			max;
+
+	// height_percent = 100.0 - (distance / 10.0);
+	// if (height_percent < 0)
+	// 	height_percent = 0;
+	// wall_height = (win->height * height_percent) / 100;
+	// // wall_height = (win->height + 50) - distance;
+	wall_height = (atan(((double)SCOPE / 2) / distance) / DEGREE) / ((double)VIEW_WIDTH / (double)win->width) * 2;
+	if (wall_height > win->height)
+		wall_height = win->height;
+	max = (int)floor((win->height / 2) + (wall_height / 2));
+	i  = (int)floor((win->height / 2) - (wall_height / 2));
+	while (i < max)
+	{
+		win->img2_data[x + (i * win->width)] = color;
+		i++;
+	}
+}
+
 void	gen_cam_picture(t_env *env)
 {
 	int			i;
@@ -152,6 +178,22 @@ void	gen_cam_picture(t_env *env)
 		if (ray)
 		{
 			draw_column(env->win, i, ray->distance, ray->wall->color);
+			// draw_column(env->win, i, (ray->distance + ray->cross_z) / 2, ray->wall->color);
+			// printf("Distance: %f\tCross_Z: %f\tAverage: %f\n", ray->distance, ray->cross_z, (ray->distance + ray->cross_z) / 2);//FIXME
+			// printf("Wall: %#x, left: (%4f, %4f), right: (%4f, %4f)\n", ray->wall->color, ray->wall->left->cam_x, ray->wall->left->cam_z, ray->wall->right->cam_x, ray->wall->right->cam_z);//FIXME
+		}
+		// else//FIXME
+		// 	printf("NO WALL: Angle: %f %f\n", angle, tan(angle * DEGREE));//FIXME
+		i++;
+	}
+	angle = ((((double)env->win->width) / 2) * angle_add) + 90 + angle_add;
+	i = 0;
+	while (i < env->win->width)
+	{
+		ray = cast_ray((angle -= angle_add), env->map->walls, NULL);
+		if (ray)
+		{
+			draw_column2(env->win, i, ray->cross_z, ray->wall->color);
 			// printf("Angle: %f, %f i: %i, Distance: %f\n", angle, tan(angle * DEGREE), i, ray->distance);//FIXME
 			// printf("Wall: %#x, left: (%4f, %4f), right: (%4f, %4f)\n", ray->wall->color, ray->wall->left->cam_x, ray->wall->left->cam_z, ray->wall->right->cam_x, ray->wall->right->cam_z);//FIXME
 		}
@@ -160,4 +202,5 @@ void	gen_cam_picture(t_env *env)
 		i++;
 	}
 	mlx_put_image_to_window(env->win->mlx, env->win->win, env->win->img, 0, 0);
+	mlx_put_image_to_window(env->win->mlx, env->win->win, env->win->img2, env->win->width, 0);
 }

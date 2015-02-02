@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/04 16:14:35 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 19:16:43 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 18:49:56 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct		s_wolf_win
 	int				height;
 	void			*img;
 	int				*img_data;
+	void			*img2;
+	int				*img2_data;
 	int				img_bits_per_pixel;
 	int				img_size_line;
 	int				img_endian;

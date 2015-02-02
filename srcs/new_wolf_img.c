@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/27 13:02:00 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/27 13:17:53 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 18:31:49 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 void	new_wolf_img(t_wolf_win *win)
 {
 	win->img = mlx_new_image(win->mlx, win->width, win->height);
+	win->img2 = mlx_new_image(win->mlx, win->width, win->height);
 	win->img_bits_per_pixel = 0;
 	win->img_size_line = 0;
 	win->img_endian = 0;
 	win->img_data = (int *)mlx_get_data_addr(win->img,
+									&(win->img_bits_per_pixel),
+									&(win->img_size_line),
+									&(win->img_endian));
+	win->img2_data = (int *)mlx_get_data_addr(win->img2,
 									&(win->img_bits_per_pixel),
 									&(win->img_size_line),
 									&(win->img_endian));

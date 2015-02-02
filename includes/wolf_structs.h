@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/25 14:50:56 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 16:08:05 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 18:20:17 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct			s_wolf_map
 typedef struct			s_wolf_ray
 {
 	double				distance;
+	double				cross_z;
 	t_wolf_wall			*wall;
 }						t_wolf_ray;
 
