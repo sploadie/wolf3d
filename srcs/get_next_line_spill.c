@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf3d_error.c                                     :+:      :+:    :+:   */
+/*   get_next_line_spill.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/04 17:32:03 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/02/03 11:35:36 by tgauvrit         ###   ########.fr       */
+/*   Created: 2015/02/03 12:25:22 by tgauvrit          #+#    #+#             */
+/*   Updated: 2015/02/03 12:29:59 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "get_next_line.h"
 
-void	wolf3d_error(char *str)
+t_spill		*get_next_line_spill(t_spill *input, int in)
 {
-	perror(str);
-	exit(1);
+	static t_spill	*spill = NULL;
+
+	if (in)
+		spill = input;
+	return (spill);
 }

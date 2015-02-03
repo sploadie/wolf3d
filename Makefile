@@ -6,7 +6,7 @@
 #    By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/20 16:35:37 by tgauvrit          #+#    #+#              #
-#    Updated: 2015/02/02 17:30:23 by tgauvrit         ###   ########.fr        #
+#    Updated: 2015/02/03 12:42:21 by tgauvrit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_COMPILED =	main.o \
 				get_file_height.o \
 				get_file_width.o \
 				get_next_line.o \
+				get_next_line_spill.o \
 				new_wolf_cam.o \
 				new_wolf_img.o \
 				new_wolf_map.o \
@@ -48,7 +49,8 @@ SRC_COMPILED =	main.o \
 				wolf3d_error.o \
 				wolf_clear_img.o \
 				gen_mlx_window.o \
-				wolf_key_hook.o
+				wolf_key_hook.o \
+				wolf_expose_hook.o
 
 COMPILED =		$(SRC_COMPILED)
 

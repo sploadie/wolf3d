@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 16:42:07 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/25 16:15:35 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/03 12:41:37 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void		get_next_line_spill_pop(void)
 {
 	t_spill	*temp_spill;
 
-	if (!(temp_spill = get_next_line_spill))
+	if (!(temp_spill = get_next_line_spill(NULL, 0)))
 		return ;
-	get_next_line_spill = get_next_line_spill->next;
+	get_next_line_spill(temp_spill->next, 1);
 	free(temp_spill->text);
 	free(temp_spill);
 }
 
-size_t	get_file_width(char *path)
+size_t			get_file_width(char *path)
 {
 	int				fd;
 	int				ret;
@@ -40,7 +40,8 @@ size_t	get_file_width(char *path)
 		i = 0;
 		while (line[i] != '\0')
 		{
-			if (!ft_strchr(ESCAPE_CHARS, line[i]) && (i == 0 || ft_strchr(ESCAPE_CHARS, line[i - 1])))
+			if (!ft_strchr(ESC_CHARS, line[i])
+				&& (i == 0 || ft_strchr(ESC_CHARS, line[i - 1])))
 				count++;
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 18:06:15 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/02 19:48:23 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/03 12:41:14 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_spill	*get_spill(int const fd)
 {
 	t_spill			*curr_spill;
 
-	curr_spill = get_next_line_spill;
+	curr_spill = get_next_line_spill(NULL, 0);
 	while (curr_spill)
 	{
 		if (curr_spill->fd == fd)
@@ -36,8 +36,8 @@ static t_spill	*get_spill(int const fd)
 	if (!curr_spill->text)
 		return (NULL);
 	*(curr_spill->text) = '\0';
-	curr_spill->next = get_next_line_spill;
-	get_next_line_spill = curr_spill;
+	curr_spill->next = get_next_line_spill(NULL, 0);
+	get_next_line_spill(curr_spill, 1);
 	return (curr_spill);
 }
 

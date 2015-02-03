@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf3d_error.c                                     :+:      :+:    :+:   */
+/*   wolf_expose_hook.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/04 17:32:03 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/02/03 11:35:36 by tgauvrit         ###   ########.fr       */
+/*   Created: 2015/01/03 19:08:20 by tgauvrit          #+#    #+#             */
+/*   Updated: 2015/02/03 11:18:44 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	wolf3d_error(char *str)
+int		wolf_expose_hook(void *env)
 {
-	perror(str);
-	exit(1);
+	ft_putendl("Expose hook hit!");
+	ft_putendl("Implementing first image...");
+	gen_cam_picture(env);
+	return (0);
 }

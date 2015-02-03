@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/25 15:14:27 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 18:33:10 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/03 12:02:32 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static void		read_map_rows(int *map_data, int fd, int width, int height)
 	ret = get_next_line(fd, &line);
 	if (ret < 1)
 		wolf3d_error("read_map_rows (1)");
-	map_data[(i = 0)] = ft_atoi((str = line));
+	str = line;
+	map_data[0] = ft_atoi(str);
+	i = 0;
 	while (*(++str) != '\0')
 	{
-		if (!ft_strchr(ESCAPE_CHARS, *str) && ft_strchr(ESCAPE_CHARS, *(str - 1)))
+		if (!ft_strchr(ESC_CHARS, *str) && ft_strchr(ESC_CHARS, *(str - 1)))
 			map_data[++i] = ft_atoi(str);
 		if (i == width)
 			wolf3d_error("read_map_rows (2)");
@@ -41,34 +43,41 @@ static void		read_map_rows(int *map_data, int fd, int width, int height)
 	read_map_rows(map_data + width, fd, width, height - 1);
 }
 
+static void		gen_points(t_wolf_point **p, int i, int width)
+{
+	p[0] = new_wolf_point(((i % width) * SCOPE)
+		, ((i / width) * -SCOPE));
+	p[1] = new_wolf_point(((i % width) * SCOPE) + SCOPE
+		, ((i / width) * -SCOPE));
+	p[2] = new_wolf_point(((i % width) * SCOPE)
+		, ((i / width) * -SCOPE) - SCOPE);
+	p[3] = new_wolf_point(((i % width) * SCOPE) + SCOPE
+		, ((i / width) * -SCOPE) - SCOPE);
+}
+
 static void		gen_map_walls(t_wolf_map *map, int *data, int size, int width)
 {
-	int		i;
-	t_wolf_point	*p_a;
-	t_wolf_point	*p_b;
-	t_wolf_point	*p_c;
-	t_wolf_point	*p_d;
+	int				i;
+	t_wolf_point	*p[4];
 
 	i = -1;
 	while (++i < size)
 	{
-		 if (data[i])
-		 {
-		 	p_a = new_wolf_point(((i % width) * SCOPE), 		((i / width) * -SCOPE));
-		 	p_b = new_wolf_point(((i % width) * SCOPE) + SCOPE, ((i / width) * -SCOPE));
-		 	p_c = new_wolf_point(((i % width) * SCOPE), 		((i / width) * -SCOPE) - SCOPE);
-		 	p_d = new_wolf_point(((i % width) * SCOPE) + SCOPE, ((i / width) * -SCOPE) - SCOPE);
-		 	if (!(i % width) || !data[i - 1])				//MAKE LEFT WALL
-		 		map->walls = new_wolf_wall(p_c, p_a, RED, map->walls);
-		 	if (!((i + 1) % width) || !data[i + 1])			//MAKE RIGHT WALL
-		 		map->walls = new_wolf_wall(p_b, p_d, GREEN, map->walls);
-		 	if (!(i / width) || !data[i - width])			//MAKE TOP WALL
-		 		map->walls = new_wolf_wall(p_a, p_b, BLUE, map->walls);
-		 	if (!((i + width) < size) || !data[i + width])	//MAKE BOTTOM WALL
-		 		map->walls = new_wolf_wall(p_d, p_c, YELLOW, map->walls);
-		 }
-		 if (data[i] == 2)
-		 	map->cam = new_wolf_cam(((i % width) * SCOPE) + (SCOPE / 2), ((i / width) * -SCOPE) - (SCOPE / 2));
+		if (data[i])
+		{
+			gen_points(p, i, width);
+			if (!(i % width) || !data[i - 1])
+				map->walls = new_wolf_wall(p[2], p[0], RED, map->walls);
+			if (!((i + 1) % width) || !data[i + 1])
+				map->walls = new_wolf_wall(p[1], p[3], GREEN, map->walls);
+			if (!(i / width) || !data[i - width])
+				map->walls = new_wolf_wall(p[0], p[1], BLUE, map->walls);
+			if (!((i + width) < size) || !data[i + width])
+				map->walls = new_wolf_wall(p[3], p[2], YELLOW, map->walls);
+		}
+		if (data[i] == 2)
+			map->cam = new_wolf_cam(((i % width) * SCOPE) + (SCOPE / 2)
+				, ((i / width) * -SCOPE) - (SCOPE / 2));
 	}
 }
 

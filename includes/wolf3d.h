@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/04 16:14:35 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 19:16:43 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/03 11:47:07 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define DEF_X 1000
 # define DEF_Y 1000
 
-# define ESCAPE_CHARS " \t"
+# define ESC_CHARS " \t"
 # define DEGREE 0.0174532925
 # define SCOPE 100
 # define VIEW_WIDTH 110
@@ -78,5 +78,6 @@ void				gen_cam_points(t_wolf_cam *cam, t_wolf_wall *wall);
 void				gen_cam_picture(t_env *env);
 
 int					wolf_key_hook(int keycode, void *env_ptr);
+int					wolf_expose_hook(void *env);
 
 #endif

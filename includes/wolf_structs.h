@@ -6,7 +6,7 @@
 /*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/25 14:50:56 by tgauvrit          #+#    #+#             */
-/*   Updated: 2015/01/31 16:08:05 by tgauvrit         ###   ########.fr       */
+/*   Updated: 2015/02/02 19:16:48 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,5 @@ typedef struct			s_wolf_ray
 	double				distance;
 	t_wolf_wall			*wall;
 }						t_wolf_ray;
-
-/*
-typedef struct			s_wolf_node
-{
-	t_wolf_wall			*wall;
-	double				distance;
-	struct s_wolf_node	*farther;
-	struct s_wolf_node	*closer;
-}						t_wolf_node;
-
-typedef struct			s_wolf_tree
-{
-	struct s_wolf_node	*left;
-	struct s_wolf_node	*right;
-}						t_wolf_tree;
-*/
 
 #endif
